@@ -1,50 +1,135 @@
 {
-	"sap.app" : {
-		"_version" : "1.1.0",
-		"id" : "ui5.boilerplate",
-		"type" : "application",
-		"i18n" : "i18n/messageBundle.properties",
-		"title" : "{{applicationTitelText}}",
-		"description" : "{{applicationDescriptionText}}",
-		"applicationVersion" : {
-			"version" : "0.1.0"
-		},
+	"_version": "1.0.0",
 
-	},
-	"sap.ui" : {
-		"_version" : "1.1.0",
-		"technology" : "UI5",
-		"deviceTypes" : {
-			"desktop" : true,
-			"tablet" : true,
-			"phone" : true
+	"sap.app": {
+		"_version": "1.0.0",
+		"id": "x.y.id",
+		"type": "application",
+		"i18n": "i18n/resourceBundle.properties",
+		"title": "{{applicationTitelText}}",
+		"description": "{{applicationDescriptionText}}",
+		"applicationVersion": {
+			"version": "0.1.0"
 		},
-		"supportedThemes" : [
+		"dataSources": {
+			"mainService": {
+				"uri": "http://services.odata.org/V2/Northwind/Northwind.svc/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "1.0.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "sap-icon://detail-view",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
 			"sap_bluecrystal"
 		]
 	},
-	"sap.ui5" : {
-		"_version" : "1.1.0",
-		"rootView" : "ui5.boilerplate.view.App",
-		"dependencies" : {
-			"minUI5Version" : "1.30",
-			"libs" : {
-				"sap.m" : {}
+	"sap.ui5": {
+		"_version": "1.0.0",
+		"rootView": {
+			"viewName": "x.y.id.view.App",
+			"type": "XML",
+			"id": "app"
+		},
+		"dependencies": {
+			"minUI5Version": "1.36.5",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.ui.unified": {},
+				"sap.ui.layout": {},
+				"sap.m": {}
 			}
 		},
-		"models" : {
-			"i18n" : {
-				"type" : "sap.ui.model.resource.ResourceModel",
-				"settings" : {
-					"bundleName" : "de.demo.timepicker.i18n.messageBundle"
+
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "x.y.id.i18n.resourceBundle"
+				}
+			},
+			"User": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"": {
+				"dataSource": "mainService",
+				"settings": {}
+			}
+		},
+		"resources": {
+			"css": [{
+				"uri": "css/style.css"
+			}]
+		},
+		"DISBALED_routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "x.y.id.view",
+				"controlId": "idAppControl",
+				"controlAggregation": "detailPages",
+				"bypassed": {
+					"target": ["master", "notFound"]
+				},
+				"async": "true"
+			},
+
+			"routes": [{
+				"pattern": "",
+				"name": "master",
+				"target": ["object", "master"]
+			}, {
+				"pattern": "Objects/{objectId}",
+				"name": "object",
+				"target": ["master", "object"]
+			}],
+
+			"targets": {
+				"master": {
+					"viewName": "Master",
+					"viewLevel": 1,
+					"viewId": "master",
+					"controlAggregation": "masterPages"
+				},
+				"object": {
+					"viewName": "Detail",
+					"viewId": "detail",
+					"viewLevel": 2
+				},
+				"detailObjectNotFound": {
+					"viewName": "DetailObjectNotFound",
+					"viewId": "detailObjectNotFound"
+				},
+				"detailNoObjectsAvailable": {
+					"viewName": "DetailNoObjectsAvailable",
+					"viewId": "detailNoObjectsAvailable"
+				},
+				"notFound": {
+					"viewName": "NotFound",
+					"viewId": "notFound"
 				}
 			}
 		},
-		"resources" : {
-			"css" : [{
-					"uri" : "css/style.css"
-				}
-			]
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
 		}
 	}
 }

@@ -1,15 +1,49 @@
 <?xml version="1.0"?>
-<mvc:View controllerName="de.demo.timepicker.controller.App"
-		  xmlns="sap.m"
-          xmlns:mvc="sap.ui.core.mvc"
-          displayBlock="true">
-	<App>
-		<pages>
-			<Page>
-				<content>
+<mvc:View controllerName="x.y.id.controller.App" xmlns:m="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:u="sap.ui.unified" displayBlock="true">
+  <u:Shell id="idShell" icon="{Shell>/logo}" headerHiding="true">
 
-				</content>
-			</Page>
-		</pages>
-	</App>
+    <u:headItems>
+      <u:ShellHeadItem tooltip="Configuration" icon="sap-icon://menu2" press="toggelShellPane"/>
+      <u:ShellHeadItem tooltip="Home" icon="sap-icon://home" visible="false"/>
+    </u:headItems>
+
+    <u:headEndItems>
+      <u:ShellHeadItem icon="sap-icon://log" tooltip="Logoff"/>
+    </u:headEndItems>
+
+    <u:user>
+      <u:ShellHeadUserItem image="{User>/image}" username="{User>/fullname}"/>
+    </u:user>
+
+    <u:search>
+      <m:SearchField/>
+    </u:search>
+
+    <u:paneContent></u:paneContent>
+
+    <u:content>
+      <m:TileContainer editable="true" allowAdd="true">
+        <m:tiles>
+          <m:StandardTile title="1st Tile" info="Tile Info Error" number="10" infoState="Error" type="None"/>
+          <m:StandardTile title="2nd Tile" info="Tile Info Success" number="7" infoState="Success" type="None"/>
+          <m:StandardTile title="3rd Tile" info="Tile Info Warning" number="7" infoState="Warning" type="None"/>
+          <m:StandardTile title="4th Tile" info="Tile Info Warning + Monitor" number="7" infoState="Warning" type="Monitor"/>
+          <m:StandardTile title="5th Tile" info="Tile Info Error + Monitor" number="10" infoState="Error" type="Monitor"/>
+          <m:StandardTile title="6thTile" info="Tile Info None + Create" number="7" infoState="None" type="Create"/>
+
+          <m:CustomTile header="7th Tile" subHeader="Subheader to 7th Tile" size="S" frameType="OneByOne" press="press">
+
+              <m:TileContent footer="Tile content footer" unit="EUR" size="XS">
+                <m:content>
+                  <m:NumericContent size="S" scale="M" value="1.96" valueColor="Error" indicator="Down"/>
+                </m:content>
+              </m:TileContent>
+
+          </m:CustomTile>
+
+        </m:tiles>
+      </m:TileContainer>
+    </u:content>
+
+  </u:Shell>
 </mvc:View>
